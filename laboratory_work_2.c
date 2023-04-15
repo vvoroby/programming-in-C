@@ -26,7 +26,18 @@ int main()
         printf("\n6 -> Выполнить последовательный поиск заданного элемента в односвязном списке");
         printf("\n7 -> Выйти из программы");
         printf("\nВведите команду: ");
-        scanf("%d",&num);
+
+        int result;
+
+        result = scanf("%d",&num);
+        getchar();
+
+        if (result != 1){
+            printf("Неверное введенное значение!");
+            result = 0;
+            while(getchar() != '\n');
+            continue;
+        }
 
         if (num == 1){
             begin();
@@ -61,8 +72,13 @@ int main()
         if (num==7){
             break;
         }
+
+        else{
+            printf("Неверное введенное значение!");
+            continue;
+        }
     }
-     return 0;
+    return 0;
 }
 
 /* Добавить первый элемент односвязного списка */
@@ -76,11 +92,23 @@ void begin(){
     }
     else{
         printf("\nВведите нужный элемент: ");
-        scanf("%d",&value);
-        a->item = value;
-        a->next = head;
-        head = a;
-        printf("Элемент добавлен!");
+
+        int result;
+        result = scanf("%d",&value);
+        getchar();
+
+        if (result != 1){
+            printf("Неверное введенное значение!");
+            result = 0;
+            while(getchar() != '\n');
+            return;
+        }
+        else{
+            a->item = value;
+            a->next = head;
+            head = a;
+            printf("Элемент добавлен!");
+        }
     }
 }
 
@@ -138,21 +166,33 @@ void add(){
     }
     else{
         printf("\nВведите нужный элемент: ");
-        scanf("%d",&value);
-        a->item = value;
-        if(head == NULL){
-            a -> next = NULL;
-            head = a;
-            printf("Элемент добавлен!");
+
+        int result;
+        result = scanf("%d",&value);
+        getchar();
+
+        if (result != 1){
+            printf("Неверное введенное значение!");
+            result = 0;
+            while(getchar() != '\n');
+            return;
         }
         else{
-            b = head;
-            while (b -> next != NULL){
-                b = b -> next;
+            a->item = value;
+            if(head == NULL){
+                a -> next = NULL;
+                head = a;
+                printf("Элемент добавлен!");
             }
-            b->next = a;
-            a->next = NULL;
-            printf("Элемент добавлен!");
+            else{
+                b = head;
+                while (b -> next != NULL){
+                    b = b -> next;
+                }
+                b->next = a;
+                a->next = NULL;
+                printf("Элемент добавлен!");
+            }
         }
     }
 }
@@ -183,17 +223,29 @@ void find(){
     }
     else{
         printf("\nВведите элемент для поиска: ");
-        scanf("%d",&value);
-        while (a!=NULL){
-            if(a->item == value){
-                printf("Элемент на позиции %d\n",i+1);
-                flag=0;
+
+        int result;
+        result = scanf("%d",&value);
+        getchar();
+
+        if (result != 1){
+            printf("Неверное введенное значение!");
+            result = 0;
+            while(getchar() != '\n');
+            return;
+        }
+        else{
+            while (a!=NULL){
+                if(a->item == value){
+                    printf("Элемент на позиции %d\n",i+1);
+                    flag=0;
+                }
+                else{
+                    flag=1;
+                }
+                i++;
+                a = a -> next;
             }
-            else{
-                flag=1;
-            }
-            i++;
-            a = a -> next;
         }
         if(flag==1){
             printf("\nЭлемент не найден!");
